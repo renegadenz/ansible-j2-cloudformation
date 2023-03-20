@@ -1,0 +1,12 @@
+- name: Deploy S3 bucket using CloudFormation
+  hosts: localhost
+  vars_files:
+    - group_vars/vars.yml
+  roles:
+    - s3_bucket
+  vars:
+    bucket_name: "{{ vars[env]['bucket_name'] }}"
+    region: "{{ vars[env]['region'] }}"
+  vars_prompt:
+    - name: env
+      prompt: "Enter environment (prod, test, dev)"

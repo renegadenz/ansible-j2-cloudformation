@@ -1,0 +1,26 @@
+# roles/s3_bucket/tasks/main.yml
+
+- name: Generate CloudFormation template file
+  template:
+    src: "{{ role_path }}/templates/s3_bucket.yml.j2"
+    dest: "{{ playbook_dir }}/s3_bucket.yml"
+  vars:
+    bucket_name: "{{ vars[env]['bucket_name'] }}"
+
+- name: Create S3 bucket using CloudFormation
+  cloudformation:
+    state: present
+    region: "{{ vars[env]['region'] }}"
+    disable_rollback: yes
+    stack_name: "{{ vars[env]['stack_name'] }}"
+    template: "{{ playbook_dir }}/s3_bucket.yml"
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  environment:
+    AWS_ACCESS_KEY_ID: "{{ aws_access_key_id }}"
+    AWS_SECRET_ACCESS_KEY: "{{ aws_secret_access_key }}"
+
+- name: Remove CloudFormation template file
+  file:
+    path: "{{ playbook_dir }}/s3_bucket.yml"
+    state: absent

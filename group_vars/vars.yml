@@ -1,0 +1,16 @@
+# group_vars/vars.yaml
+
+prod:
+  stack_name: example-prod-ansible-prod
+  bucket_name: example-prod-ansible-prod
+  region: ap-southeast-2
+
+test:
+  stack_name: example-prod-ansible-test
+  bucket_name: example-test-ansible-test
+  region: ap-southeast-2
+
+dev:
+  stack_name: example-prod-ansible-dev
+  bucket_name: example-dev-ansible-dev
+  region: ap-southeast-2
