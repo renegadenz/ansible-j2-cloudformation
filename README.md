@@ -1,0 +1,1 @@
+# ansible-j2-cloudformation
